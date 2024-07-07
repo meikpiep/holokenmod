@@ -8,12 +8,16 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import androidx.activity.viewModels
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -29,15 +33,20 @@ import org.piepmeyer.gauguin.ui.newgame.NewGameActivity
 
 private val logger = KotlinLogging.logger {}
 
-class MainActivity : AppCompatActivity() {
+class MainActivity :
+    AppCompatActivity(),
+    GridCreationListener,
+    GameSolvedListener {
     private val game: Game by inject()
     private val gameLifecycle: GameLifecycle by inject()
+    private val calculationService: GridCalculationService by inject()
     private val applicationPreferences: ApplicationPreferences by inject()
     private val activityUtils: ActivityUtils by inject()
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var topFragment: GameTopFragment
     private lateinit var bottomAppBarService: MainBottomAppBarService
+    lateinit var barcodeLauncher: ActivityResultLauncher<ScanOptions>
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +56,22 @@ class MainActivity : AppCompatActivity() {
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
 
         gameLifecycle.setCoroutineScope(this.lifecycleScope)
+
+        barcodeLauncher =
+            registerForActivityResult(
+                ScanContract(),
+            ) {
+                if (it.contents == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast
+                        .makeText(
+                            this,
+                            "Scanned: " + it.contents,
+                            Toast.LENGTH_LONG,
+                        ).show()
+                }
+            }
 
         game.gridUI = binding.gridview
         binding.gridview.setOnLongClickListener {
