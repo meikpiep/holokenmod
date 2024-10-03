@@ -58,4 +58,64 @@
         <item name="colorGridSelectedText">@color/md_theme_light_onSecondary</item>
         <item name="colorGridCage">#512f36</item>
   </style>
+
+  <style name="AppThemeMonochrome" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="materialDrawerStyle">@style/Widget.MaterialDrawerStyle</item>
+    <item name="materialDrawerHeaderStyle">@style/Widget.MaterialDrawerHeaderStyle</item>
+    <item name="android:windowActivityTransitions">true</item>
+
+    <item name="android:windowSharedElementEnterTransition">
+      @transition/change_image_transform</item>
+    <item name="android:windowSharedElementExitTransition">
+      @transition/change_image_transform</item>
+
+    <item name="colorPrimary">@color/md_theme_monochrome_primary</item>
+    <item name="colorOnPrimary">@color/md_theme_monochrome_onPrimary</item>
+    <item name="colorPrimaryContainer">@color/md_theme_monochrome_primaryContainer</item>
+    <item name="colorOnPrimaryContainer">@color/md_theme_monochrome_onPrimaryContainer</item>
+    <item name="colorSecondary">@color/md_theme_monochrome_secondary</item>
+    <item name="colorOnSecondary">@color/md_theme_monochrome_onSecondary</item>
+    <item name="colorSecondaryContainer">@color/md_theme_monochrome_secondaryContainer</item>
+    <item name="colorOnSecondaryContainer">@color/md_theme_monochrome_onSecondaryContainer</item>
+    <item name="colorTertiary">@color/md_theme_monochrome_tertiary</item>
+    <item name="colorOnTertiary">@color/md_theme_monochrome_onTertiary</item>
+    <item name="colorTertiaryContainer">@color/md_theme_monochrome_tertiaryContainer</item>
+    <item name="colorOnTertiaryContainer">@color/md_theme_monochrome_onTertiaryContainer</item>
+    <item name="colorError">@color/md_theme_monochrome_error</item>
+    <item name="colorErrorContainer">@color/md_theme_monochrome_errorContainer</item>
+    <item name="colorOnError">@color/md_theme_monochrome_onError</item>
+    <item name="colorOnErrorContainer">@color/md_theme_monochrome_onErrorContainer</item>
+    <item name="android:colorBackground">@color/md_theme_monochrome_background</item>
+    <item name="colorOnBackground">@color/md_theme_monochrome_onBackground</item>
+    <item name="colorSurface">@color/md_theme_monochrome_surface</item>
+    <item name="colorOnSurface">@color/md_theme_monochrome_onSurface</item>
+    <item name="colorSurfaceVariant">@color/md_theme_monochrome_surfaceVariant</item>
+    <item name="colorOnSurfaceVariant">@color/md_theme_monochrome_onSurfaceVariant</item>
+    <item name="colorOutline">@color/md_theme_monochrome_outline</item>
+    <item name="colorOnSurfaceInverse">@color/md_theme_monochrome_inverseOnSurface</item>
+    <item name="colorSurfaceInverse">@color/md_theme_monochrome_inverseSurface</item>
+    <item name="colorCustomColor1">#705d00</item>
+    <item name="colorOnCustomColor1">#ffffff</item>
+    <item name="colorCustomColor1Container">#EEEEEE</item>
+    <item name="colorOnCustomColor1Container">#221b00</item>
+    <item name="harmonizeCustomColor1">false</item>
+    <item name="colorCustomColor2">#9c4140</item>
+    <item name="colorOnCustomColor2">#ffffff</item>
+    <item name="colorCustomColor2Container">#ffdad8</item>
+    <item name="colorOnCustomColor2Container">#410006</item>
+    <item name="harmonizeCustomColor2">false</item>
+    <item name="colorPrimaryInverse">@color/md_theme_monochrome_inversePrimary</item>
+    <item name="colorMainFabForeground">@color/md_theme_monochrome_secondary</item>
+    <item name="colorMainFabBackground">@color/md_theme_monochrome_onSecondary</item>
+    <item name="colorMainTopPanelForeground">@color/md_theme_monochrome_onTertiary</item>
+    <item name="colorMainTopPanelBackground">@color/md_theme_monochrome_tertiary</item>
+    <item name="colorMainHintPopupSuccessForeground">@color/md_theme_monochrome_popup_onSuccess</item>
+    <item name="colorMainHintPopupSuccessBackground">@color/md_theme_monochrome_popup_success</item>
+    <item name="colorMainHintPopupErrorsForeground">@color/md_theme_monochrome_popup_onError</item>
+    <item name="colorMainHintPopupErrorsBackground">@color/md_theme_monochrome_popup_error</item>
+    <item name="colorGridSelected">@color/md_theme_monochrome_grid_selected</item>
+    <item name="colorGridSelectedText">@color/md_theme_monochrome_grid_selected_text</item>
+    <item name="colorGridCage">@color/md_theme_monochrome_grid_cage</item>
+
+  </style>
 </resources>

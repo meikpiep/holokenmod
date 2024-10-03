@@ -82,6 +82,12 @@
             style="@style/VerticalButtonGroupButton"
             android:text="@string/setting_theme_entry_dynamic_colors"
             />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/themeMonochrome"
+            style="@style/VerticalButtonGroupButton"
+            app:icon="@drawable/monochrome_photos_24px"
+            android:text="Monochrome"
+            />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,9 @@ class ActivityUtils : KoinComponent {
             Theme.DYNAMIC_COLORS -> {
                 activity.setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
             }
+            Theme.MONOCHROME -> {
+                activity.setTheme(R.style.AppThemeMonochrome)
+            }
         }
 
         when (applicationPreferences.nightMode) {
