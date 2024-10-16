@@ -138,4 +138,7 @@
         <item name="legendTextColor">?attr/colorOnSurface</item>
     </style>
 
+
+    <style name="MaterialCarView.FastFinishingMode" parent="Widget.Material3.CardView.Outlined">
+    </style>
 </resources>

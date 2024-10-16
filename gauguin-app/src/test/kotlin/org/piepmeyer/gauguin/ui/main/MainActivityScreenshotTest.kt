@@ -43,6 +43,7 @@ class MainActivityScreenshotTest(
         NewGame,
         NewGameWithCellDetails,
         GameWith6x6GridFromZeroOnPossibleIn3x3,
+        GameWith6x6GridFastFinishingMode,
         GameWith7x7GridFromZeroOnPossibleIn3x3,
         NewGameWithRectangularGrid,
         NewGameWithRectangularGridAndFastFinishingMode,
@@ -100,6 +101,10 @@ class MainActivityScreenshotTest(
             onActivityViaUiState()
 
             gameLifecycle.stoppGameTimerAndResetGameTime()
+
+            while (it.binding.mainBottomAppBar.isLayoutRequested) {
+                Thread.sleep(100)
+            }
         }
 
         robolectricScreenshotRule
@@ -137,6 +142,17 @@ class MainActivityScreenshotTest(
 
                 game.selectCell(game.grid.getCell(0))
                 game.grid.getCell(25).possibles = game.grid.variant.possibleDigits
+                game.gridUI.invalidate()
+            }
+
+            UiStateEnum.GameWith6x6GridFastFinishingMode -> {
+                preferences.gridTakesRemainingSpaceIfNecessary = false
+
+                game.updateGrid(createGrid(11, 11))
+
+                game.selectCell(game.grid.getCell(15))
+                game.enterFastFinishingMode()
+
                 game.gridUI.invalidate()
             }
 

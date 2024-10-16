@@ -20,9 +20,9 @@
         android:layout_margin="16dp"
         android:visibility="invisible"
 
-        android:backgroundTint="#50000000"
-        android:foregroundTint="?attr/colorCustomColor1"
-        style="@style/Widget.Material3.CardView.Elevated"
+        android:backgroundTint="?attr/colorCustomColor1"
+        android:foregroundTint="#50000000"
+        style="MaterialCarView.FastFinishingMode"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,7 @@
                 android:layout_margin="16dp"
                 android:text="@string/fast_finishing_mode_deactivate_fast_finishing_mode_button"
                 app:icon="@drawable/outline_clear_24"
-                style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Tertiary"
+                style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

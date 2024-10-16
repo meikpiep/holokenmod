@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -68,19 +67,18 @@ class KeyPadFragment :
             addButtonListeners(it)
         }
 
+        if (layoutId != layoutCalculator.calculateLayoutId(game.grid)) {
+            // requireActivity().recreate()
+            this.requireView().forceLayout()
+        }
+
         val viewModel: MainViewModel by viewModels()
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
-                    if (it.state == MainUiState.PLAYING) {
-                        requireActivity().runOnUiThread {
-                            if (layoutId != layoutCalculator.calculateLayoutId(game.grid)) {
-                                requireActivity().recreate()
-                            } else {
-                                setButtonStates()
-                            }
-                        }
+                    requireActivity().runOnUiThread {
+                        setButtonStates()
                     }
                 }
             }
@@ -89,7 +87,9 @@ class KeyPadFragment :
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.fastFinishingModeState.collect {
-                    setButtonStates()
+                    requireActivity().runOnUiThread {
+                        setButtonStates()
+                    }
                 }
             }
         }
@@ -127,15 +127,8 @@ class KeyPadFragment :
             val digit = digitsIterator.next()
 
             numberButtonToDigit[it] = digit
-            it.text =
-                game.grid.variant.options.numeralSystem
-                    .displayableString(digit)
 
-            if (it.text.length > 4) {
-                val cutTextIndex = (it.text.length / 2 + 0.4).roundToInt()
-
-                it.text = "${it.text.subSequence(0, cutTextIndex)}\n${it.text.subSequence(cutTextIndex, it.text.length)}"
-            }
+            it.text = possibleMultiLneText(digit)
 
             it.visibility =
                 when {
@@ -149,9 +142,27 @@ class KeyPadFragment :
             i++
         }
 
-        val padding = layoutCalculator.calculateLayoutMarginBottom(game.grid)
+        /*val padding = layoutCalculator.calculateLayoutMarginBottom(game.grid)
         rootView.updateLayoutParams<ViewGroup.MarginLayoutParams> { }
         rootView.setPaddingRelative(0, padding, 0, padding)
-        rootView.invalidate()
+        rootView.invalidate()*/
+    }
+
+    private fun possibleMultiLneText(digit: Int): String {
+        var text =
+            game.grid.variant.options.numeralSystem
+                .displayableString(digit)
+
+        if (text.length > 4) {
+            val cutTextIndex = (text.length / 2 + 0.4).roundToInt()
+
+            text = "${text.subSequence(0, cutTextIndex)}\n${
+                text.subSequence(
+                    cutTextIndex,
+                    text.length,
+                )
+            }"
+        }
+        return text
     }
 }

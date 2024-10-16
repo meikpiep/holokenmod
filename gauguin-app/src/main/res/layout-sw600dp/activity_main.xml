@@ -106,7 +106,7 @@
             <FrameLayout
                 android:id="@+id/fastFinishingModeFrame"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/keypadFrame"
                 app:layout_constraintBottom_toBottomOf="@id/keypadFrame"
                 app:layout_constraintStart_toStartOf="@id/keypadFrame"

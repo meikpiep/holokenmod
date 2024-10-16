@@ -5,7 +5,6 @@ import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.view.marginStart
 import androidx.core.view.updateLayoutParams
 import androidx.drawerlayout.widget.DrawerLayout
 import com.mikepenz.materialdrawer.holder.StringHolder
@@ -167,16 +166,25 @@ class MainNavigationViewService(
     }
 
     private fun updateMainBottomBarMargins(right: Int) {
-        mainActivity.runOnUiThread {
-            if (binding.mainBottomAppBar.marginStart != 0 && right > 0 && binding.mainBottomAppBar.marginStart != right) {
-                val marginParams =
-                    binding.mainBottomAppBar.layoutParams as ViewGroup.MarginLayoutParams
-                marginParams.marginStart = right
+        val marginParams =
+            binding.mainBottomAppBar.layoutParams as ViewGroup.MarginLayoutParams
 
-                binding.mainBottomAppBar.updateLayoutParams<ViewGroup.MarginLayoutParams> { }
-                binding.mainBottomAppBar.invalidate()
+        if (marginParams.marginStart != 0 && right > 0 && marginParams.marginStart != right) {
+//            marginParams.marginStart = right
+
+            binding.mainBottomAppBar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                this.marginStart = right
+                this.width -= binding.root.width - right
             }
+
+            binding.hint.requestLayout()
+            binding.mainBottomAppBar.invalidateMenu()
+            binding.mainBottomAppBar.forceLayout()
+            binding.mainBottomAppBar.requestLayout()
+            binding.root.forceLayout()
+            println("------------------------------------------------")
         }
+        println(right.toString() + " - " + marginParams.marginStart)
     }
 
     private fun createDrawerClickListener(): (v: View?, item: IDrawerItem<*>, position: Int) -> Boolean =
