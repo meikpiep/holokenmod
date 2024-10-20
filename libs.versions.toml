@@ -62,7 +62,7 @@ roborazzi-junit = { group = "io.github.takahirom.roborazzi", name = "roborazzi-j
 junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engine", version = "5.11.2" }
 
 thirdparty-konfetti = { group = "nl.dionsegijn", name = "konfetti-xml", version = "2.0.4" }
-thirdparty-ferriswheel = { group = "com.github.meikpiep", name = "Ferris-Wheel", version = "1.3.2" }
+thirdparty-ferriswheel = { group = "com.github.meikpiep", name = "ferriswheel", version = "1.3.3-SNAPSHOT" }
 thirdparty-navigationdrawer = { group = "com.mikepenz", name = "materialdrawer", version = "9.0.2" }
 thirdparty-balloon = { group = "com.github.skydoves", name = "balloon", version = "1.6.8" }
 thirdparty-vico = { group = "com.patrykandpatrick.vico", name = "views", version = "2.0.0-beta.1" }
