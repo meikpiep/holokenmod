@@ -36,7 +36,11 @@
                 android:id="@+id/squareRectangularToggleGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:singleSelection="true"
                 app:selectionRequired="true"
@@ -64,10 +68,10 @@
                 android:id="@+id/widthslider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/squareRectangularToggleGroup"
                 app:layout_constraintEnd_toStartOf="@id/newGameGridSize"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/squareRectangularToggleGroup"
                 android:valueFrom="3.0"
                 android:valueTo="11.0"
                 android:stepSize="1.0"/>
@@ -76,10 +80,11 @@
                 android:id="@+id/heigthslider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintStart_toStartOf="@id/widthslider"
                 app:layout_constraintEnd_toEndOf="@id/widthslider"
                 app:layout_constraintTop_toBottomOf="@id/widthslider"
-                app:layout_constraintBottom_toTopOf="@id/squareRectangularToggleGroup"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:valueFrom="3.0"
                 android:valueTo="11.0"
                 android:stepSize="1.0" />
@@ -91,10 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintStart_toEndOf="@id/widthslider"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/widthslider"
-                app:layout_constraintTop_toBottomOf="@id/squareRectangularToggleGroup" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
