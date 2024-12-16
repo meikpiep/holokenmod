@@ -128,20 +128,47 @@ class GridUI :
         val maximumWidth = (gridSize.width * maximumCellSizeInDP * resources.displayMetrics.density).toInt()
         val maximumHeight = (gridSize.height * maximumCellSizeInDP * resources.displayMetrics.density).toInt()
 
-        return when {
-            widthMode == MeasureSpec.UNSPECIFIED && heightMode == MeasureSpec.UNSPECIFIED ->
-                Pair(maximumWidth, maximumHeight)
-            widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY ->
-                Pair(widthSize, heightSize)
-            else -> {
-                val cellSize = potentialCellSize(widthSize, heightSize)
+        println("on measure: $widthMode x $heightMode")
+        println("on measure2: $widthSize x $heightSize")
 
-                Pair(
-                    min(widthSize, cellSize.first * gridSize.width),
-                    min(heightSize, cellSize.second * gridSize.height),
-                )
+        val measured =
+            when {
+                widthMode == MeasureSpec.UNSPECIFIED && heightMode == MeasureSpec.UNSPECIFIED -> {
+                    println("both unspecified: $maximumWidth x $maximumHeight")
+
+                    Pair(maximumWidth, maximumHeight)
+                }
+                widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY -> {
+                    println("both exectly: $widthSize x $heightSize")
+
+                    Pair(widthSize, heightSize)
+                }
+                /*widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.AT_MOST -> {
+                    println("most: $widthSize x $heightSize")
+
+                    Pair(widthSize, min(widthSize, heightSize))
+                }*/
+                else -> {
+                    val cellSize = potentialCellSize(widthSize, heightSize)
+
+                    println("else with cellSize $cellSize")
+                    println(
+                        "else with ${min(
+                            widthSize,
+                            cellSize.first * gridSize.width,
+                        )} x ${min(heightSize, cellSize.second * gridSize.height)}",
+                    )
+
+                    Pair(
+                        min(widthSize, cellSize.first * gridSize.width),
+                        min(heightSize, cellSize.second * gridSize.height),
+                    )
+                }
             }
-        }
+
+        println("measured: ${measured.first} x ${measured.second}")
+
+        return measured
     }
 
     override fun onSizeChanged(

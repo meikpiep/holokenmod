@@ -10,7 +10,6 @@
     <FrameLayout
         android:id="@+id/bottomSheet"
         style="@style/Widget.Material3.BottomSheet"
-        app:backgroundTint="?attr/colorSurfaceVariant"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:orientation="horizontal"
