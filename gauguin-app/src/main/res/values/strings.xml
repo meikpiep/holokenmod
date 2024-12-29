@@ -5,6 +5,8 @@
     <string name="main_menu_item_load_game">Load</string>
     <string name="main_menu_item_save_game">Save</string>
     <string name="main_menu_item_save_game_with_comment">Save with comment</string>
+    <string name="main_menu_item_share_game">Share via QR code</string>
+    <string name="main_menu_item_scan_game">Scan via QR code</string>
     <string name="main_menu_item_restart_game">Restart Game</string>
     <string name="main_menu_item_show_statistics">Statistics</string>
     <string name="main_menu_item_open_settings">Settings</string>

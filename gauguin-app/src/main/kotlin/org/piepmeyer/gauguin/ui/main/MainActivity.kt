@@ -7,9 +7,9 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import androidx.activity.viewModels
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,13 +33,9 @@ import org.piepmeyer.gauguin.ui.newgame.NewGameActivity
 
 private val logger = KotlinLogging.logger {}
 
-class MainActivity :
-    AppCompatActivity(),
-    GridCreationListener,
-    GameSolvedListener {
+class MainActivity : AppCompatActivity() {
     private val game: Game by inject()
     private val gameLifecycle: GameLifecycle by inject()
-    private val calculationService: GridCalculationService by inject()
     private val applicationPreferences: ApplicationPreferences by inject()
     private val activityUtils: ActivityUtils by inject()
 

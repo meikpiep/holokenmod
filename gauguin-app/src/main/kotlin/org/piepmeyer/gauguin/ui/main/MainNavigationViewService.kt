@@ -70,15 +70,15 @@ class MainNavigationViewService(
         }
     private val shareGameViaQrCodeItem =
         PrimaryDrawerItem().apply {
-            name = StringHolder("Share")
+            nameRes = R.string.main_menu_item_share_game
             identifier = 6
-            iconRes = R.drawable.outline_save_24
+            iconRes = R.drawable.share_variant
         }
     private val scanQrCodeToImportGameItem =
         PrimaryDrawerItem().apply {
-            name = StringHolder("Scan")
+            nameRes = R.string.main_menu_item_scan_game
             identifier = 7
-            iconRes = R.drawable.outline_save_24
+            iconRes = R.drawable.qrcode_scan
         }
     private val statisticsItem =
         SecondaryDrawerItem().apply {
