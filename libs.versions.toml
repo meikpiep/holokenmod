@@ -69,6 +69,9 @@ thirdparty-vico = { group = "com.patrykandpatrick.vico", name = "views", version
 thirdparty-androidplot = { group = "com.androidplot", name = "androidplot-core", version = "1.5.11" }
 thirdparty-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version = "2.14" }
 
+zxing-embedded = { group = "com.journeyapps", name = "zxing-android-embedded", version = "4.3.0" }
+zxing-core = { group = "com.google.zxing", name = "core", version = "3.5.3" }
+
 [plugins]
 
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
@@ -85,6 +88,7 @@ roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
 logging = ["logging-kotlin", "logging-slf"]
 kotest = ["kotest-runner", "kotest-assertions", "kotest-parametrizedtests", "kotest-koin"]
 koin = ["koin-core", "koin-annotations", "koin-ksp-compiler"]
+zxing = ["zxing-embedded", "zxing-core"]
 androidx-test = ["androidx-test-junit-ktx", "androidx-test-rules", "androidx-test-runner"]
 screenshotTests = ["androiduitestingutils-utils", "androiduitestingutils-robolectric", "roboelectric", "roborazzi", "roborazzi-junit", "junit-vintage-engine"]
 
