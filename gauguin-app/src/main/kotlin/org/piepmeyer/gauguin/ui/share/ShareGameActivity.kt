@@ -33,7 +33,7 @@ class ShareGameActivity : AppCompatActivity() {
         println("${serializedGrid.length}")
 
         val bos = ByteArrayOutputStream()
-        GZIPOutputStream(bos).bufferedWriter(Charsets.UTF_8).use { it.write(serializedGrid) }
+        GZIPOutputStream(bos).bufferedWriter().use { it.write(serializedGrid) }
 
         val compressedGrid = String(bos.toByteArray())
 
@@ -41,7 +41,7 @@ class ShareGameActivity : AppCompatActivity() {
 
         try {
             val barcodeEncoder = BarcodeEncoder()
-            val bitmap = barcodeEncoder.encodeBitmap(compressedGrid, BarcodeFormat.QR_CODE, 400, 400)
+            val bitmap = barcodeEncoder.encodeBitmap(compressedGrid, BarcodeFormat.QR_CODE, 800, 800)
             binding.qrCode.setImageBitmap(bitmap)
         } catch (e: Exception) {
         }

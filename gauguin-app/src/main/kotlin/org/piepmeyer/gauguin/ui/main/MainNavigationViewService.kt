@@ -238,7 +238,6 @@ class MainNavigationViewService(
                     scanOptions.setOrientationLocked(false)
                     scanOptions.setBarcodeImageEnabled(false)
                     scanOptions.setPrompt("Test")
-                    scanOptions
 
                     mainActivity.barcodeLauncher.launch(scanOptions)
                 }
