@@ -166,8 +166,6 @@ class GameLifecycle(
                 startNewGrid()
             }
         }
-
-        calculationService.calculateNextGrid(scope)
     }
 
     fun loadGame(saveGameFile: File) {

@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.future.asCompletableFuture
 import kotlinx.coroutines.launch
 import org.piepmeyer.gauguin.creation.GridCalculatorFactory
 import org.piepmeyer.gauguin.grid.Grid
@@ -34,6 +35,8 @@ class GridCalculationService(
         nextGrid = null
         this.variant = variant
         calculateCurrentGrid(scope, invokeAfterNewGridWasCreated)
+
+        calculateNextGrid(scope)
     }
 
     private fun calculateCurrentGrid(
@@ -55,9 +58,11 @@ class GridCalculationService(
             }
     }
 
-    fun calculateNextGrid(scope: CoroutineScope) {
+    private fun calculateNextGrid(scope: CoroutineScope) {
         nextGridJob =
             scope.launch(dispatcher) {
+                currentGridJob?.asCompletableFuture()?.join()
+
                 logger.info { "Calculating next grid of $variant" }
                 listeners.forEach { it.startingNextGridCalculation() }
 
@@ -70,9 +75,7 @@ class GridCalculationService(
             }
     }
 
-    fun hasCalculatedNextGrid(variantParam: GameVariant): Boolean {
-        return nextGrid != null && variantParam == variant
-    }
+    fun hasCalculatedNextGrid(variantParam: GameVariant): Boolean = nextGrid != null && variantParam == variant
 
     fun consumeNextGrid(): Grid {
         val grid = nextGrid!!
