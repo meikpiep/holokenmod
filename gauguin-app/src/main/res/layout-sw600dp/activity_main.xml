@@ -8,13 +8,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity"
-    android:fitsSystemWindows="false"
     >
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainConstraintLayout"

@@ -3,6 +3,7 @@ package org.piepmeyer.gauguin.ui.statistics
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getString
 import androidx.fragment.app.commit
@@ -38,6 +39,7 @@ class StatisticsActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         binding = ActivityStatisticsBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
 
         binding.clearstats.setOnClickListener { _: View? ->

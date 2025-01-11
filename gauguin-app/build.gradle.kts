@@ -27,7 +27,7 @@ android {
     defaultConfig {
         applicationId = "org.piepmeyer.gauguin"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
     }
 
     if (keystoreExists) {
@@ -147,6 +147,7 @@ dependencies {
     implementation(libs.android.material)
 
     implementation(libs.androidx.ktx)
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.drawerlayout)
     implementation(libs.androidx.fragment)

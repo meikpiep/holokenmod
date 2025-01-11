@@ -3,11 +3,8 @@ package org.piepmeyer.gauguin.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.view.marginStart
-import androidx.core.view.updateLayoutParams
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.commit
 import com.mikepenz.materialdrawer.holder.StringHolder
@@ -177,7 +174,7 @@ class MainNavigationViewService(
     }
 
     private fun updateMainBottomBarMargins(right: Int) {
-        mainActivity.runOnUiThread {
+        /*mainActivity.runOnUiThread {
             if (binding.mainBottomAppBar.marginStart != 0 && right > 0 && binding.mainBottomAppBar.marginStart != right) {
                 val marginParams =
                     binding.mainBottomAppBar.layoutParams as ViewGroup.MarginLayoutParams
@@ -186,7 +183,7 @@ class MainNavigationViewService(
                 binding.mainBottomAppBar.updateLayoutParams<ViewGroup.MarginLayoutParams> { }
                 binding.mainBottomAppBar.invalidate()
             }
-        }
+        }*/
     }
 
     private fun createDrawerClickListener(): (v: View?, item: IDrawerItem<*>, position: Int) -> Boolean =

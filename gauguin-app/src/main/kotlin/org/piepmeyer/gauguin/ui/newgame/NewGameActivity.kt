@@ -1,6 +1,7 @@
 package org.piepmeyer.gauguin.ui.newgame
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ class NewGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityNewgameBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
 
         activityUtils.configureTheme(this)

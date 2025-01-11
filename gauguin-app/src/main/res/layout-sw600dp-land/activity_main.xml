@@ -8,7 +8,7 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     tools:context=".ui.main.MainActivity"
-    android:fitsSystemWindows="true">
+    >
 
     <nl.dionsegijn.konfetti.xml.KonfettiView
         android:id="@+id/konfettiView"
@@ -19,7 +19,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainConstraintLayout"

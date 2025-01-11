@@ -30,9 +30,12 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.recyclerview.widget.RecyclerView android:id="@android:id/list"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+        />
 
         <TextView android:id="@android:id/empty"
             android:layout_width="fill_parent"

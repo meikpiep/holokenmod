@@ -25,6 +25,7 @@ android-material = { group = "com.google.android.material", name = "material", v
 
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version = "1.9.1" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version = "1.15.0" }
+androidx-activity = { group = "androidx.activity", name = "activity-ktx", version = "1.9.3" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.0" }
 androidx-drawerlayout = { group = "androidx.drawerlayout", name = "drawerlayout", version = "1.2.0" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version = "1.8.5" }
