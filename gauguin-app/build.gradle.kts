@@ -28,6 +28,7 @@ android {
         applicationId = "org.piepmeyer.gauguin"
         minSdk = 24
         targetSdk = 34
+        testInstrumentationRunner = "org.piepmeyer.gauguin.InstrumentationTestRunner"
     }
 
     if (keystoreExists) {

@@ -5,17 +5,11 @@ import android.content.Context
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.color.DynamicColorsOptions
 import io.github.oshai.kotlinlogging.KotlinLogging
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.binds
-import org.koin.core.module.dsl.createdAtStart
-import org.koin.core.module.dsl.withOptions
-import org.koin.dsl.module
-import org.piepmeyer.gauguin.preferences.ApplicationPreferences
 import org.piepmeyer.gauguin.preferences.ApplicationPreferencesImpl
-import org.piepmeyer.gauguin.preferences.StatisticsManager
-import org.piepmeyer.gauguin.preferences.StatisticsManagerImpl
 import org.piepmeyer.gauguin.ui.ActivityUtils
 import org.piepmeyer.gauguin.ui.DynamicColorsPrecondition
 
@@ -29,42 +23,32 @@ class MainApplication : Application() {
 
         val applicationPreferences = ApplicationPreferencesImpl(this)
 
+        val koinApplication =
+            startKoin {
+                androidLogger()
+                androidContext(this@MainApplication)
+
+                val statisticsPreferences = getSharedPreferences("stats", Context.MODE_PRIVATE)
+
+                applicationPreferences.migrateGridSizeFromTwoToThree()
+
+                modules(
+                    CoreModule(filesDir).module(),
+                    ApplicationModule(filesDir, statisticsPreferences, applicationPreferences).module(),
+                )
+            }
+
         val options =
-            DynamicColorsOptions.Builder()
+            DynamicColorsOptions
+                .Builder()
                 .setThemeOverlay(R.style.AppTheme_Overlay)
                 .setPrecondition(DynamicColorsPrecondition())
                 .build()
 
         DynamicColors.applyToActivitiesIfAvailable(this, options)
 
-        startKoin {
-            androidLogger()
-            androidContext(this@MainApplication)
-
-            val appModule =
-                module {
-                    single {
-                        applicationPreferences
-                    } withOptions { binds(listOf(ApplicationPreferences::class)) }
-                    single {
-                        StatisticsManagerImpl(
-                            filesDir,
-                            this@MainApplication.getSharedPreferences("stats", Context.MODE_PRIVATE),
-                        )
-                    } withOptions {
-                        binds(listOf(StatisticsManager::class))
-                        createdAtStart()
-                    }
-                    single { ActivityUtils() }
-                }
-
-            applicationPreferences.migrateGridSizeFromTwoToThree()
-
-            modules(
-                CoreModule(filesDir).module(),
-                appModule,
-            )
-        }
+        val activityUtils = get<ActivityUtils>()
+        activityUtils.configureNightMode()
 
         logger.info {
             "Gauguin application started successfully, " +

@@ -33,10 +33,25 @@ class ActivityUtils : KoinComponent {
         when (applicationPreferences.theme) {
             Theme.LIGHT -> {
                 activity.setTheme(R.style.AppTheme)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             Theme.DARK -> {
                 activity.setTheme(R.style.AppTheme)
+                // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            Theme.SYSTEM_DEFAULT, Theme.DYNAMIC_COLORS -> {
+                activity.setTheme(R.style.AppTheme)
+                // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
+    }
+
+    fun configureNightMode() {
+        when (applicationPreferences.theme) {
+            Theme.LIGHT -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            Theme.DARK -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
             Theme.SYSTEM_DEFAULT, Theme.DYNAMIC_COLORS -> {
