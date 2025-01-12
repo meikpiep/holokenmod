@@ -35,37 +35,40 @@ class ThemeChooserFragment(
 
         binding.navigationDrawerThemeLight.isChecked = preferences.theme == Theme.LIGHT
         binding.navigationDrawerThemeLight.setOnClickListener {
-            preferences.theme = Theme.LIGHT
-            activityUtils.configureTheme(mainActivity)
+            switchToTheme(Theme.LIGHT)
         }
 
         binding.navigationDrawerThemeDark.isChecked = preferences.theme == Theme.DARK
         binding.navigationDrawerThemeDark.setOnClickListener {
-            preferences.theme = Theme.DARK
-            activityUtils.configureTheme(mainActivity)
+            switchToTheme(Theme.DARK)
         }
 
         binding.navigationDrawerThemeAuto.isChecked = preferences.theme == Theme.SYSTEM_DEFAULT
         binding.navigationDrawerThemeAuto.setOnClickListener {
-            preferences.theme = Theme.SYSTEM_DEFAULT
-            activityUtils.configureTheme(mainActivity)
+            switchToTheme(Theme.SYSTEM_DEFAULT)
         }
 
         binding.navigationDrawerThemeDynamicColors.isChecked = preferences.theme == Theme.DYNAMIC_COLORS
         binding.navigationDrawerThemeDynamicColors.setOnClickListener {
-            preferences.theme = Theme.DYNAMIC_COLORS
-            activityUtils.configureTheme(mainActivity)
-
-            val options =
-                DynamicColorsOptions
-                    .Builder()
-                    .setThemeOverlay(R.style.AppTheme_Overlay)
-                    .setPrecondition(DynamicColorsPrecondition())
-                    .build()
-
-            DynamicColors.applyToActivitiesIfAvailable(this.mainActivity.application, options)
+            switchToTheme(Theme.DYNAMIC_COLORS)
         }
 
         return binding.root
+    }
+
+    private fun switchToTheme(theme: Theme) {
+        preferences.theme = theme
+
+        activityUtils.configureTheme(mainActivity)
+        activityUtils.configureNightMode()
+
+        val options =
+            DynamicColorsOptions
+                .Builder()
+                .setThemeOverlay(R.style.AppTheme_Overlay)
+                .setPrecondition(DynamicColorsPrecondition())
+                .build()
+
+        DynamicColors.applyToActivitiesIfAvailable(this.mainActivity.application, options)
     }
 }

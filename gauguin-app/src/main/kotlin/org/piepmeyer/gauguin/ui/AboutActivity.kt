@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
-import org.piepmeyer.gauguin.R
 import org.piepmeyer.gauguin.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
@@ -13,8 +12,10 @@ class AboutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAboutBinding
 
     public override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        activityUtils.configureTheme(this)
+
         super.onCreate(savedInstanceState)
+
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -26,7 +27,9 @@ class AboutActivity : AppCompatActivity() {
 
         binding.aboutShareApplicationLog.setOnClickListener {
             val reversedLines =
-                Runtime.getRuntime().exec("logcat -d")
+                Runtime
+                    .getRuntime()
+                    .exec("logcat -d")
                     .inputStream
                     .bufferedReader()
                     .readLines()

@@ -2,23 +2,36 @@ package org.piepmeyer.gauguin.ui.newgame
 
 import com.github.takahirom.roborazzi.captureRoboImage
 import com.google.android.material.tabs.TabLayout
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
-import org.koin.test.KoinTest
+import org.koin.core.module.dsl.binds
+import org.koin.core.module.dsl.withOptions
+import org.koin.dsl.module
+import org.piepmeyer.gauguin.MainApplication
 import org.piepmeyer.gauguin.R
 import org.piepmeyer.gauguin.ScreenshotTest
 import org.piepmeyer.gauguin.ScreenshotTestUtils
+import org.piepmeyer.gauguin.Theme
 import org.piepmeyer.gauguin.creation.GridCreator
 import org.piepmeyer.gauguin.creation.RandomPossibleDigitsShuffler
 import org.piepmeyer.gauguin.creation.SeedRandomizerMock
 import org.piepmeyer.gauguin.grid.Grid
 import org.piepmeyer.gauguin.grid.GridSize
+import org.piepmeyer.gauguin.options.DifficultySetting
+import org.piepmeyer.gauguin.options.DigitSetting
 import org.piepmeyer.gauguin.options.GameOptionsVariant
 import org.piepmeyer.gauguin.options.GameVariant
+import org.piepmeyer.gauguin.options.GridCageOperation
+import org.piepmeyer.gauguin.options.NumeralSystem
+import org.piepmeyer.gauguin.options.SingleCageUsage
+import org.piepmeyer.gauguin.preferences.ApplicationPreferences
 import org.piepmeyer.gauguin.ui.grid.GridUI
 import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -37,7 +50,7 @@ import sergio.sastre.uitesting.utils.common.UiMode
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 class NewGameActivityScreenshotTest(
     private val testItem: TestDataForActivity<UiStateEnum>,
-) : KoinTest {
+) {
     enum class UiStateEnum {
         TabBasic,
         TabNumbers,
@@ -75,6 +88,26 @@ class NewGameActivityScreenshotTest(
             config = testItem.config,
             deviceScreen = testItem.device,
         )
+
+    @Before
+    fun before() {
+        MainApplication.testOverideModule =
+            module {
+                single {
+                    mockk<ApplicationPreferences>(relaxed = true) {
+                        every { theme } returns Theme.LIGHT
+                        every { difficultySetting } returns DifficultySetting.ANY
+                        every { digitSetting } returns DigitSetting.FIRST_DIGIT_ONE
+                        every { numeralSystem } returns NumeralSystem.Decimal
+                        every { operations } returns GridCageOperation.OPERATIONS_ALL
+                        every { singleCageUsage } returns SingleCageUsage.FIXED_NUMBER
+                        every { gridWidth } returns 9
+                        every { gridHeigth } returns 9
+                        every { gameVariant } returns GameOptionsVariant.createClassic()
+                    }
+                } withOptions { binds(listOf(ApplicationPreferences::class)) }
+            }
+    }
 
     @After
     fun after() {
